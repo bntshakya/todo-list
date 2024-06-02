@@ -20,24 +20,26 @@ if (isset($_POST['email']) and isset($_POST['password'])){
 
     $servername = 'localhost';
     $username = 'root';
-    $password = '';
+    $password_db = '';
     $dbname = 'mydb';
 
     // connection 
-    $conn = new mysqli($servername,$username,$password,$dbname);
+    $conn = new mysqli($servername,$username,$password_db,$dbname);
 
     if ($conn -> connect_error){
         die('connection error : '. $conn ->connect_error);
     }
 
-    $sql = "SELECT Password FROM UserInfo WHERE Email='$email'";
+    $sql = "SELECT Password FROM MyUsers WHERE Email='$email'";
 
     $result = $conn -> query($sql);
 
     if ($result -> num_rows > 0) {
         $row = $result -> fetch_assoc();
-        $password_from_table = $row["password"];
+        $password_from_table = $row["Password"];
+        // echo $password_from_table;
         if ($password_from_table === $password){
+                echo 'Correct Credentials';
         }
         else{
             echo 'Incorrect Credentials';
