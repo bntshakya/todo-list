@@ -39,7 +39,8 @@ if (isset($_POST['email']) and isset($_POST['password'])){
         $password_from_table = $row["Password"];
         // echo $password_from_table;
         if ($password_from_table === $password){
-                echo 'Correct Credentials';
+                header("Location: todo.php?email=".$email);
+                exit();
         }
         else{
             echo 'Incorrect Credentials';
